@@ -1,0 +1,16 @@
+<h1 class="text-center">Subir guias de importación</h1>
+<div class="row pt-4">
+    <div class="col-md-5 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" action="/process" enctype="multipart/form-data">
+                    <div class="mb-2">
+                        <label for="formFile" class="form-label">Adjuntar Excel</label>
+                        <input required class="form-control" type="file" id="formFile" name="file" accept=".xlsx,.csv">
+                    </div>
+                    <div class="d-grid gap-2 mt-5"><button type="submit" class="btn btn-primary btn-block" >Procesar</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

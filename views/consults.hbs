@@ -1,0 +1,75 @@
+<h1 class="text-center">Consultar guias de importación</h1>
+<div class="row pt-4">
+  <div class="col-md-12 mx-auto">
+    <div class="card w-100">
+      <div class="card-body">
+        <form method="GET" action="/process" enctype="multipart/form-data">
+            <div class="mb-2">
+              <label for="guide" class="form-label">Escribe el numero de guia</label>
+              <textarea class="form-control" id="guide" name="guide" rows="3">{{params.guide}}</textarea>
+            </div>
+
+            <div class="mb-2">
+              <label for="payments" class="form-label">Pago</label>
+              <select class="form-select" id="payments" name="payments" aria-label="Default select example">
+                <option value="">Seleccione...</option>
+                {{#each payments}}
+                  <option value="{{name}}" {{#if selected}} selected {{/if}}>{{name}}</option>
+                {{/each}}
+              </select>
+            </div>
+
+            <div class="mb-2">
+              <label for="empty" class="form-label">Sin Factura</label>
+              <input class="form-check-input" type="checkbox" value="1" id="empty" name="empty" {{#if params.empty}} checked {{/if}}>
+            </div>
+            <div class="d-grid gap-2 mt-5"><button type="submit" class="btn btn-primary btn-block" >Consultar</button></div>
+        </form>
+
+        <form method="POST" action="/process/excel">
+          <input name="results" type="hidden" value="{{results_text}}"/>
+          <div class="d-grid gap-2 mt-5"><button type="submit" class="btn btn-success btn-block" >Excel</button></div>
+        </form>
+        <hr>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">DOCUMENTO DE TRANSPORTE</th>
+              <th scope="col">FACTURA</th>
+              <th scope="col">MODALIDAD</th>
+              <th scope="col">FORMA PAGO</th>
+              <th scope="col">TIPO DE IMPORTACION</th>
+              <th scope="col">VALOR FOB USD</th>
+              <th scope="col">Nº ACEPTACION</th>
+              <th scope="col">FECHA ACEPTACION</th>
+              <th scope="col">STICKER</th>
+              <th scope="col">FECHA STICKER</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#if results}}
+              {{#each results}}
+                <tr>
+                  <th scope="row">{{id_guia}}</th>
+                  <td>{{id_factura}}</td>
+                  <td>{{pago}}</td>
+                  <td>{{manejo_2}}</td>
+                  <td>{{manejo_3}}</td>
+                  <td>{{valor}}</td>
+                  <td>{{num_aceptacion}}</td>
+                  <td>{{fecha_aceptacion}}</td>
+                  <td>{{sticker}}</td>
+                  <td>{{fecha_sticker}}</td>
+                </tr>
+              {{/each}}
+            {{else}}
+              <tr class="no-data">
+                <td colspan="10" >No data</td>
+              </tr>
+            {{/if}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
